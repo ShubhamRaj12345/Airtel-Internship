@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Google Style Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+  <style>
+    body { margin: 0; }
+
+    #map {
+      height: 100vh;
+      width: 100%;
+      touch-action: pan-x pan-y; /* ✅ smooth mobile drag */
+    }
+
+    /* 🏷️ TOOLTIP (WHITE TEXT FIX) */
+    .leaflet-tooltip {
+      background: rgba(0,0,0,0.75);
+      border: none;
+      box-shadow: none;
+      color: white;
+      font-weight: bold;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
+    /* 💬 POPUP FIX (RESPONSIVE + WHITE TEXT) */
+    .leaflet-popup-content-wrapper {
+      background: #1e1e1e;
+      color: white;
+      border-radius: 10px;
+      max-width: 85vw;   /* ✅ mobile fit */
+    }
+
+    .leaflet-popup-content {
+      color: white;
+      word-wrap: break-word;
+      white-space: normal;
+      max-width: 80vw;
+    }
+
+    .leaflet-popup-tip {
+      background: #1e1e1e;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+
+  // 🧭 SMOOTH MAP (drag fix)
+  var map = L.map('map', {
+    inertia: true,
+    zoomAnimation: true,
+    fadeAnimation: true,
+    preferCanvas: true
+  }).setView([25.5945, 85.142], 14);
+
+  // 🗺 GOOGLE MAP STYLE TILE
+  L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+    maxZoom: 20,
+    subdomains:['mt0','mt1','mt2','mt3']
+  }).addTo(map);
+
+  // 🔴 RED CIRCLE (unchanged)
+  L.circle([25.5945, 85.142], {
+    color: 'red',
+    fillColor: '#ff0000',
+    fillOpacity: 0.3,
+    radius: 1500
+  }).addTo(map);
+
+  // 📍 MARKERS
+  
+    var marker = L.marker([25.5945, 85.142]).addTo(map);
+
+    marker.bindPopup(`
+      <b>Kankarbagh</b><br><br>
+      SNo: 2<br>
+      Site: MRKH02<br>
+      WIFI: 0<br>
+      Gross: 100<br>
+      CAF: 1<br>
+      SSO: 0<br>
+      MNP+Fresh: 0<br>
+      Distance: 0.00 KM
+    `);
+
+    marker.bindTooltip("Kankarbagh (Wifi:0 | Gross:100)", {
+      permanent: true,
+      direction: "top",
+      offset: [0, -10]
+    });
+  
+    var marker = L.marker([25.593, 85.1395]).addTo(map);
+
+    marker.bindPopup(`
+      <b>Gandhi Maidan</b><br><br>
+      SNo: 5<br>
+      Site: MRKH05<br>
+      WIFI: 0<br>
+      Gross: 20<br>
+      CAF: 0<br>
+      SSO: 0<br>
+      MNP+Fresh: 1<br>
+      Distance: 0.30 KM
+    `);
+
+    marker.bindTooltip("Gandhi Maidan (Wifi:0 | Gross:20)", {
+      permanent: true,
+      direction: "top",
+      offset: [0, -10]
+    });
+  
+    var marker = L.marker([25.5941, 85.1376]).addTo(map);
+
+    marker.bindPopup(`
+      <b>Danapur</b><br><br>
+      SNo: 1<br>
+      Site: MRKH01<br>
+      WIFI: 1<br>
+      Gross: 2000<br>
+      CAF: 0<br>
+      SSO: 0<br>
+      MNP+Fresh: 1<br>
+      Distance: 0.44 KM
+    `);
+
+    marker.bindTooltip("Danapur (Wifi:1 | Gross:2000)", {
+      permanent: true,
+      direction: "top",
+      offset: [0, -10]
+    });
+  
+    var marker = L.marker([25.5955, 85.137]).addTo(map);
+
+    marker.bindPopup(`
+      <b>Patna Junction</b><br><br>
+      SNo: 4<br>
+      Site: MRKH04<br>
+      WIFI: 1<br>
+      Gross: 50<br>
+      CAF: 0<br>
+      SSO: 0<br>
+      MNP+Fresh: 2<br>
+      Distance: 0.51 KM
+    `);
+
+    marker.bindTooltip("Patna Junction (Wifi:1 | Gross:50)", {
+      permanent: true,
+      direction: "top",
+      offset: [0, -10]
+    });
+  
+    var marker = L.marker([25.596, 85.135]).addTo(map);
+
+    marker.bindPopup(`
+      <b>Boring Road</b><br><br>
+      SNo: 3<br>
+      Site: MRKH03<br>
+      WIFI: 1<br>
+      Gross: 5<br>
+      CAF: 1<br>
+      SSO: 0<br>
+      MNP+Fresh: 4<br>
+      Distance: 0.72 KM
+    `);
+
+    marker.bindTooltip("Boring Road (Wifi:1 | Gross:5)", {
+      permanent: true,
+      direction: "top",
+      offset: [0, -10]
+    });
+  
+
+</script>
+
+</body>
+</html>
