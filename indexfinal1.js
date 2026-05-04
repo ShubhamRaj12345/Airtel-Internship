@@ -92,7 +92,7 @@ fs.createReadStream(process.env.CSV_PATH)
     });
   })
   .on('end', () => {
-    console.log('✅ Location CSV Loaded');
+    console.log('Location CSV Loaded');
   });
 
 fs.createReadStream(process.env.NEWLIST_PATH)
@@ -104,7 +104,7 @@ fs.createReadStream(process.env.NEWLIST_PATH)
     });
   })
   .on('end', () => {
-    console.log('✅ User CSV Loaded');
+    console.log('User CSV Loaded');
   });
 
 bot.onText(/\/start/, (msg) => {
@@ -119,14 +119,14 @@ bot.onText(/\/start/, (msg) => {
       mobile: existingUser.mobile
     };
 
-    return bot.sendMessage(chatId, "✅ Welcome back!\n🏢 Enter SITE:");
+    return bot.sendMessage(chatId, " Welcome back!\n  Enter SITE:");
   }
 
   userState[chatId] = { step: "ask_employeeId" };
 
   bot.sendMessage(
     chatId,
-    "👋 Welcome\n❌ You are not registered in the system.\nPlease enter your Employee ID to begin registration."
+    "Welcome\n You are not registered in the system.\nPlease enter your Employee ID to begin registration."
   );
 });
 
@@ -150,16 +150,16 @@ bot.on('message', (msg) => {
         mobile: user.mobile
       };
 
-      bot.sendMessage(chatId, "📱 Share your mobile number", {
+      bot.sendMessage(chatId, "Share your mobile number", {
         reply_markup: {
-          keyboard: [[{ text: "Share Contact ☎️", request_contact: true }]],
+          keyboard: [[{ text: "Share Contact ", request_contact: true }]],
           one_time_keyboard: true,
           resize_keyboard: true
         }
       });
 
     } else {
-      bot.sendMessage(chatId, "❌ Invalid Employee ID. Try again:");
+      bot.sendMessage(chatId, "Invalid Employee ID. Try again:");
     }
   }
 
@@ -176,7 +176,7 @@ bot.on('message', (msg) => {
     const siteLocations = locations.filter(loc => loc.site === enteredSite);
 
     if (siteLocations.length === 0) {
-      return bot.sendMessage(chatId, "❌ Invalid SITE. Try again:");
+      return bot.sendMessage(chatId, "Invalid SITE. Try again:");
     }
 
     userState[chatId].site = enteredSite;
@@ -194,13 +194,13 @@ bot.on('message', (msg) => {
 
     results.sort((a, b) => a.distance - b.distance);
 
-    let message = `📍 Site: ${enteredSite}\n`;
-    message += `📌 Location: ${ref.latitude}, ${ref.longitude}\n\n`;
+    let message = `Site: ${enteredSite}\n`;
+    message += `Location: ${ref.latitude}, ${ref.longitude}\n\n`;
 
     const nearby = results.filter(loc => loc.distance <= 1500);
 
     if (nearby.length === 0) {
-      return bot.sendMessage(chatId, "❌ No locations found within 1.5 KM");
+      return bot.sendMessage(chatId, "No locations found within 1.5 KM");
     }
 
    nearby.forEach((loc, index) => {
@@ -220,7 +220,7 @@ bot.on('message', (msg) => {
       time
     ]);
 
-bot.sendMessage(chatId, "Site Name Receive ⏳ Preparing files...");
+bot.sendMessage(chatId, "Site Name Receive Preparing files...");
 
 Promise.all([
   generateKMZ(nearby, {
@@ -235,11 +235,11 @@ Promise.all([
 ])
 .then(([kmzFile, htmlFile]) => {
   return bot.sendDocument(chatId, kmzFile, {
-    caption: `📍 Site: ${enteredSite}\n📦 KMZ File Ready`
+    caption: ` Site: ${enteredSite}\n  KMZ File Ready`
   })
   .then(() => {
     return bot.sendDocument(chatId, htmlFile,{
-      caption: `📄 HTML Report for Site: ${enteredSite}`
+      caption: `HTML Report for Site: ${enteredSite}`
     });
   });
 
@@ -249,7 +249,7 @@ Promise.all([
 })
 .catch(err => {
   console.log("Error:", err);
-  bot.sendMessage(chatId, "❌ Error generating files");
+  bot.sendMessage(chatId, "Error generating files");
 });
  }
 });
@@ -278,11 +278,11 @@ bot.on('contact', (msg) => {
 
     userState[chatId].step = "ask_site";
 
-    bot.sendMessage(chatId, "✅ Verified!\n🏢 Now enter SITE (example: MRKH01)", {
+    bot.sendMessage(chatId, "Verified!\n  Now enter SITE (example: MRKH01)", {
       reply_markup: { remove_keyboard: true }
     });
 
   } else {
-    bot.sendMessage(chatId, "❌ Mobile number does not match.");
+    bot.sendMessage(chatId, "Mobile number does not match.");
   }
 });

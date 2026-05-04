@@ -27,10 +27,9 @@ function generateHTML(nearby, center, fileName = "map.html") {
     #map {
       height: 100vh;
       width: 100%;
-      touch-action: pan-x pan-y; /* ✅ smooth mobile drag */
+      touch-action: pan-x pan-y; 
     }
 
-    /* 🏷️ TOOLTIP (WHITE TEXT FIX) */
     .leaflet-tooltip {
       background: rgba(0,0,0,0.75);
       border: none;
@@ -42,12 +41,12 @@ function generateHTML(nearby, center, fileName = "map.html") {
       font-size: 12px;
     }
 
-    /* 💬 POPUP FIX (RESPONSIVE + WHITE TEXT) */
+    
     .leaflet-popup-content-wrapper {
       background: #1e1e1e;
       color: white;
       border-radius: 10px;
-      max-width: 85vw;   /* ✅ mobile fit */
+      max-width: 85vw;  
     }
 
     .leaflet-popup-content {
@@ -72,7 +71,6 @@ function generateHTML(nearby, center, fileName = "map.html") {
 
 <script>
 
-  // 🧭 SMOOTH MAP (drag fix)
   var map = L.map('map', {
     inertia: true,
     zoomAnimation: true,
@@ -80,13 +78,11 @@ function generateHTML(nearby, center, fileName = "map.html") {
     preferCanvas: true
   }).setView([${center.latitude}, ${center.longitude}], 14);
 
-  // 🗺 GOOGLE MAP STYLE TILE
   L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
     maxZoom: 20,
     subdomains:['mt0','mt1','mt2','mt3']
   }).addTo(map);
 
-  // 🔴 RED CIRCLE (unchanged)
   L.circle([${center.latitude}, ${center.longitude}], {
     color: 'red',
     fillColor: '#ff0000',
@@ -94,7 +90,6 @@ function generateHTML(nearby, center, fileName = "map.html") {
     radius: 1500
   }).addTo(map);
 
-  // 📍 MARKERS
   ${nearby.map(loc => `
     var marker = L.marker([${loc.latitude}, ${loc.longitude}]).addTo(map);
 

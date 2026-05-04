@@ -18,7 +18,7 @@ const kmlHeader = `<?xml version="1.0" encoding="UTF-8"?>
   <longitude>${center.longitude}</longitude>
   <latitude>${center.latitude}</latitude>
   <altitude>0</altitude>
-  <range>2000</range>   <!-- zoom level -->
+  <range>2000</range>  
   <tilt>0</tilt>
   <heading>0</heading>
 </LookAt>
@@ -43,7 +43,7 @@ const kmlHeader = `<?xml version="1.0" encoding="UTF-8"?>
         max-width: 260px;
       ">
 
-        <!-- 🔷 TITLE -->
+      
         <h2 style="
           margin:0;
           color:black;
@@ -54,7 +54,7 @@ const kmlHeader = `<?xml version="1.0" encoding="UTF-8"?>
       
         <hr style="margin:8px 0; border:0; border-top:1px solid #ddd;">
 
-        <!-- 🔽 DATA -->
+    
         <div>
           $[description]
         </div>
@@ -121,7 +121,7 @@ const kmlHeader = `<?xml version="1.0" encoding="UTF-8"?>
       border-radius:10px;
       font-weight:bold;
      ">
-    🧭 Get Direction
+      Get Direction
   </a>
 </div>
 ]]>
@@ -162,7 +162,7 @@ const kmlHeader = `<?xml version="1.0" encoding="UTF-8"?>
 
     const centerPopup = `
 <Placemark>
-  <name>📍 ${fileName}</name>
+  <name> ${fileName}</name>
 
   <description>
     <![CDATA[
@@ -184,7 +184,7 @@ const kmlHeader = `<?xml version="1.0" encoding="UTF-8"?>
     const archive = archiver('zip');
 
     output.on('close', () => {
-      console.log("✅ KMZ Ready");
+      console.log("KMZ Ready");
       fs.unlinkSync("temp.kml"); 
       resolve(fullPath);
     });
